@@ -1,7 +1,7 @@
 package com.cjuca.typecodealbums.core.model
 
 data class User(
-    val id: Int,
+    val id: Long,
     val name: String,
     val username: String,
     val email: String,

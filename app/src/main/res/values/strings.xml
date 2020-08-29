@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TypecodeAlbums</string>
+    <string name="empty_title_for_user">Any user available</string>
 </resources>
