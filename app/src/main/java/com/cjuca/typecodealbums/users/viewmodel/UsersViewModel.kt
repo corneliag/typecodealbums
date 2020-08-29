@@ -28,7 +28,7 @@ class UsersViewModel(private val manager: IAlbumsManager) : ViewModel() {
                 .subscribe({ users ->
                     dataSource.onNext(UsersUiData(users))
                 }, { throwable ->
-                    Log.e("UsersViewModel", "Failed to get albums", throwable)
+                    Log.e("UsersViewModel", "Failed to get users", throwable)
                     dataSource.onNext(UsersUiData(emptyList()))
                 })
         )

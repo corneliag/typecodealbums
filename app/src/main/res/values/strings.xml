@@ -2,4 +2,7 @@
     <string name="app_name">TypecodeAlbums</string>
     <string name="empty_title_for_user">Any user available</string>
     <string name="search">Search</string>
+    <string name="search_no_result">No result available</string>
+    <string name="empty_title_for_album">Any album available</string>
+    <string name="toolbar_albums_title">Albums</string>
 </resources>

@@ -16,6 +16,9 @@ class UsersUiDataMapper {
                     true
                 ) || it.email.contains(searchValue, true)
             }
+            if (filteredList.isEmpty()) {
+                return listOf(EmptyItem(R.string.search_no_result))
+            }
             return filteredList.map {
                 UserUiItem(it.id, it.name, it.username, it.email, it.phone, it.website)
             }

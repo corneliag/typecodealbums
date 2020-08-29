@@ -1,5 +1,6 @@
 package com.cjuca.typecodealbums
 
+import com.cjuca.typecodealbums.albums.viewmodel.AlbumsViewModel
 import com.cjuca.typecodealbums.core.ApiService
 import com.cjuca.typecodealbums.core.manager.AlbumsManager
 import com.cjuca.typecodealbums.core.manager.IAlbumsManager
@@ -19,4 +20,5 @@ val appModule = module {
 
 val appViewModel = module {
     viewModel { UsersViewModel(get()) }
+    viewModel { (userId: Long) -> AlbumsViewModel(userId, get()) }
 }

@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import com.cjuca.typecodealbums.albums.AlbumsActivity
 import com.cjuca.typecodealbums.base.bind
 import com.cjuca.typecodealbums.users.viewholder.UsersViewHolder
 import com.cjuca.typecodealbums.users.viewmodel.UsersViewModel
@@ -21,11 +22,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val viewModel: UsersViewModel by viewModel()
 
     private val contentView by bind<View>(R.id.contentView)
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewHolder = UsersViewHolder(contentView, viewModel) {
-            //TODO
+            AlbumsActivity.start(this, it)
         }
     }
 
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         menuInflater.inflate(R.menu.users_menu, menu)
         val searchItem = menu?.findItem(R.id.action_search)
         if (searchItem != null) {
-            val searchView = searchItem?.actionView as SearchView
+            searchView = searchItem.actionView as SearchView
 
             searchView.setOnCloseListener { true }
             val searchPlate =
@@ -65,5 +67,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onBackPressed() {
+        if (!searchView.isIconified) {
+            searchView.onActionViewCollapsed()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
