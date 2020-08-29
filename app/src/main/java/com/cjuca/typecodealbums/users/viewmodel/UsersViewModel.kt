@@ -17,13 +17,13 @@ class UsersViewModel(private val manager: IAlbumsManager) : ViewModel() {
     }
 
     init {
-        fetchUsers()
+        fetchUsers("")
     }
 
-    private fun fetchUsers() {
+    fun fetchUsers(searchValue: String) {
         compositeDisposable.add(
             manager.getUsers().map {
-                UsersUiDataMapper().mapToUiData(it)
+                UsersUiDataMapper().mapToUiData(it, searchValue)
             }.subscribeOn(Schedulers.io())
                 .subscribe({ users ->
                     dataSource.onNext(UsersUiData(users))
