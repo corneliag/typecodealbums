@@ -20,6 +20,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".albums.AlbumsActivity" />
+        <activity android:name=".photos.activity.PhotosActivity" />
+        <activity
+            android:name=".photos.activity.FullscreenImageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="behind"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

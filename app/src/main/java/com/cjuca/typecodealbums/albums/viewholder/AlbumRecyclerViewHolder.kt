@@ -10,10 +10,10 @@ import com.cjuca.typecodealbums.base.bind
 class AlbumRecyclerViewHolder(itemView: View, private val onClick: (id: Long) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
 
-    private val nameView by itemView.bind<TextView>(R.id.nameView)
+    private val titleView by itemView.bind<TextView>(R.id.titleView)
 
     fun bind(item: AlbumUiItem) {
-        nameView.text = item.title
+        titleView.text = item.title
         itemView.setOnClickListener {
             onClick.invoke(item.id)
         }

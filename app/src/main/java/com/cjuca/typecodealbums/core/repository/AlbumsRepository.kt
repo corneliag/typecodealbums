@@ -1,6 +1,7 @@
 package com.cjuca.typecodealbums.core.repository
 
 import com.cjuca.typecodealbums.core.model.Album
+import com.cjuca.typecodealbums.core.model.Photo
 import com.cjuca.typecodealbums.core.model.User
 import io.reactivex.Single
 
@@ -19,5 +20,11 @@ class AlbumsRepository(
         return localRepository.getAlbums(id)
             .filter { albums -> albums.isNotEmpty() }
             .switchIfEmpty(remoteRepository.getAlbums(id))
+    }
+
+    override fun getPhotos(id: Long): Single<List<Photo>> {
+        return localRepository.getPhotos(id)
+            .filter { photos -> photos.isNotEmpty() }
+            .switchIfEmpty(remoteRepository.getPhotos(id))
     }
 }

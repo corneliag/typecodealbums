@@ -5,4 +5,7 @@
     <string name="search_no_result">No result available</string>
     <string name="empty_title_for_album">Any album available</string>
     <string name="toolbar_albums_title">Albums</string>
+    <string name="image_content_description">Image content description</string>
+    <string name="empty_title_for_photo">Any photo is available</string>
+    <string name="toolbar_photos_title">Photos</string>
 </resources>

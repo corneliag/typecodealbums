@@ -1,4 +1,4 @@
-package com.cjuca.typecodealbums.albums
+package com.cjuca.typecodealbums.photos.activity
 
 import android.content.Context
 import android.content.Intent
@@ -7,41 +7,40 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.cjuca.typecodealbums.R
-import com.cjuca.typecodealbums.albums.viewholder.AlbumsViewHolder
-import com.cjuca.typecodealbums.albums.viewmodel.AlbumsViewModel
 import com.cjuca.typecodealbums.base.bind
-import com.cjuca.typecodealbums.photos.activity.PhotosActivity
+import com.cjuca.typecodealbums.photos.viewholder.PhotosViewHolder
+import com.cjuca.typecodealbums.photos.viewmodel.PhotoViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.properties.Delegates
 
-class AlbumsActivity : AppCompatActivity(R.layout.activity_albums) {
+class PhotosActivity : AppCompatActivity(R.layout.activity_photos) {
 
     companion object {
-        private const val USER_ID = "userId"
+        private const val ALBUM_ID = "albumId"
 
-        fun start(context: Context, userId: Long) {
-            val intent = Intent(context, AlbumsActivity::class.java)
-            intent.putExtra(USER_ID, userId)
+        fun start(context: Context, albumId: Long) {
+            val intent = Intent(context, PhotosActivity::class.java)
+            intent.putExtra(ALBUM_ID, albumId)
             context.startActivity(intent)
         }
     }
 
-    private var userId: Long = -1
-    private var viewHolder by Delegates.notNull<AlbumsViewHolder>()
-    private val viewModel: AlbumsViewModel by viewModel { parametersOf(userId) }
+    private var albumId: Long = -1
+    private var viewHolder by Delegates.notNull<PhotosViewHolder>()
+    private val viewModel: PhotoViewModel by viewModel { parametersOf(albumId) }
     private val contentView by bind<View>(R.id.contentView)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         intent.extras?.let { extras ->
-            userId = extras.getLong(USER_ID, -1)
+            albumId = extras.getLong(ALBUM_ID, -1)
         }
-        viewHolder = AlbumsViewHolder(contentView, viewModel) {
-            PhotosActivity.start(this, it)
+        viewHolder = PhotosViewHolder(contentView, viewModel) {
+            FullscreenImageActivity.start(this, it, contentView)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.toolbar_albums_title)
+        supportActionBar?.title = getString(R.string.toolbar_photos_title)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

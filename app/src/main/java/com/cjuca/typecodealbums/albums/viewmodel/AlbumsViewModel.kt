@@ -28,7 +28,7 @@ class AlbumsViewModel(private val userId: Long, private val manager: IAlbumsMana
                 .subscribe({ albums ->
                     dataSource.onNext(AlbumsUiData(albums))
                 }, { throwable ->
-                    Log.e("AlbumsViewModel", "Failed to get albums", throwable)
+                    Log.e("AlbumsViewModel", "Failed to get albums $userId", throwable)
                     dataSource.onNext(AlbumsUiData(emptyList()))
                 })
         )

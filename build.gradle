@@ -40,6 +40,7 @@ ext {
     gson = '2.8.5'
     stetho = '1.5.1'
     koin_version = '2.1.5'
+    glide = '4.9.0'
 }
 
 task clean(type: Delete) {

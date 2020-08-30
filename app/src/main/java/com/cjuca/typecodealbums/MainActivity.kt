@@ -11,8 +11,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import com.cjuca.typecodealbums.albums.AlbumsActivity
 import com.cjuca.typecodealbums.base.bind
+import com.cjuca.typecodealbums.core.api.ApiClient
 import com.cjuca.typecodealbums.users.viewholder.UsersViewHolder
 import com.cjuca.typecodealbums.users.viewmodel.UsersViewModel
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
@@ -20,12 +22,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private var viewHolder by Delegates.notNull<UsersViewHolder>()
     private val viewModel: UsersViewModel by viewModel()
-
+    private val apiClient: ApiClient by inject()
     private val contentView by bind<View>(R.id.contentView)
     private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        apiClient.initializeClient()
         viewHolder = UsersViewHolder(contentView, viewModel) {
             AlbumsActivity.start(this, it)
         }
