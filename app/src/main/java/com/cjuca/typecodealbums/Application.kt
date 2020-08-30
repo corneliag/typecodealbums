@@ -14,7 +14,7 @@ class Application : Application() {
             // declare used Android context
             androidContext(this@Application)
             // declare modules
-            modules(modules = listOf(appModule, appViewModel))
+            modules(modules = listOf(daoModule, appModule, appViewModel))
         }
     }
 }

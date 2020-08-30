@@ -16,16 +16,16 @@ class ApiClient(private val context: Context) : IApiClient {
 
     private lateinit var service: ApiService
     override fun initializeClient() {
-        OkHttpClient.Builder()
-            .addNetworkInterceptor(StethoInterceptor()).build()
-        create(context)
+        val client = OkHttpClient.Builder().addNetworkInterceptor(StethoInterceptor()).build()
+        create(context, client)
     }
 
-    private fun create(context: Context) {
+    private fun create(context: Context, client: OkHttpClient) {
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(context.getString(R.string.configurationUrl))
+            .client(client)
             .build()
 
         service = retrofit.create(ApiService::class.java)
